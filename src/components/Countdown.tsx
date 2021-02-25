@@ -16,6 +16,7 @@ export function Countdown() {
 
   function startCountdown() {
     setIsActive(true)
+    setHasFineshed(false)
   }
 
   function resetCountdown() {
@@ -31,10 +32,8 @@ export function Countdown() {
       }, 1)
     } else {
       if (time == 0 && isActive) {
-        setTime(25 * 60)
         setIsActive(false)
         setHasFineshed(true)
-        console.log('Finalizou um ciclo!')
       }
     }
   }, [isActive, time])
@@ -52,17 +51,25 @@ export function Countdown() {
           <span>{secondRight}</span>
         </div>
       </div>
-      {isActive ? (
-        <button type="button"
-          className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
-          onClick={resetCountdown}
-        >Abandonar ciclo</button>
+
+      {hasFineshed ? (
+        <button disabled className={styles.countdownButton}>Ciclo finalizado :)</button>
       ) : (
-          <button type="button"
-            className={styles.countdownButton}
-            onClick={startCountdown}
-          >Iniciar um novo ciclo</button>
-        )}
+          <>
+            {isActive ? (
+              <button type="button"
+                className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
+                onClick={resetCountdown}
+              >Abandonar ciclo</button>
+            ) : (
+                <button type="button"
+                  className={styles.countdownButton}
+                  onClick={startCountdown}
+                >Iniciar um novo ciclo</button>
+              )}
+          </>
+        )
+      }
     </div>
   )
 }

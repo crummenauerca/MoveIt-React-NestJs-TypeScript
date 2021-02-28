@@ -9,18 +9,12 @@ import { GetServerSideProps } from 'next'
 import { CountdownProvider } from "../contexts/CountdownContext"
 import { ChallengesProvider } from "../contexts/ChallengesContext"
 
-interface HomeProps {
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
-}
-
 export default function Home(props) {
   return (
     <ChallengesProvider
       level={props.level}
       currentExperience={props.currentExperience}
-      challengesCompleted={props.currentExperience}
+      challengesCompleted={props.challengesCompleted}
     >
       <div className={styles.container}>
         <Head>
